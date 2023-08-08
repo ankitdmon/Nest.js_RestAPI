@@ -18,6 +18,4 @@ export class BookService {
         const result = await this.bookModel.create(book);
         return result;
     }
-
-    
 }

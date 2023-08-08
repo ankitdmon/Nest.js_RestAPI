@@ -13,7 +13,7 @@ export enum Category{
 })
 
 export class Book {
-    @Prop()
+    @Prop({unique: true, required: true })
     title: string;
 
     @Prop()
