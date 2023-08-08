@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Book } from './schemas/book.schema';
 import mongoose from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { async } from 'rxjs';
 
 @Injectable()
 export class BookService {
@@ -32,5 +33,9 @@ export class BookService {
           new: true,
           runValidators: true,
         });
-      }      
+      }  
+      
+      async deleteBookById(id:string):Promise<Book>{
+        return await this.bookModel.findByIdAndDelete(id);
+      }
 }
