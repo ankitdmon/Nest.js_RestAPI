@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Book } from './schemas/book.schema';
 import mongoose from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -16,6 +16,14 @@ export class BookService {
 
     async createBook(book: Book) : Promise<Book> {
         const result = await this.bookModel.create(book);
+        return result;
+    }
+
+    async getBookById(id:string) : Promise<Book> {
+        const result= await this.bookModel.findById(id);
+        if(!result){
+            throw new NotFoundException('No Book Found!!')
+        }
         return result;
     }
 }
